@@ -5,3 +5,8 @@ RUN apt-get install -y wget python3.4-dev
 RUN wget -o/dev/null -O- https://bootstrap.pypa.io/get-pip.py | python3.4
 RUN pip install numpy
 RUN pip install pyCUDA
+
+ENV PYCUDA_CACHE_DIR=/tmp
+
+ONBUILD ADD lib* /usr/lib/
+ONBUILD RUN ldconfig
