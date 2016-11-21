@@ -5,6 +5,7 @@ Preparation
 
 Copy libcuda driver files into your build directory
 including the symbolic links. For example:
+
     cp -R /usr/lib/libcuda.so* .
 
 Then make your own build Dockerfile containing e.g.:
@@ -20,11 +21,17 @@ Build your docker image:
 Using
 =====
 
-Running cmd like bash or nvcc
+Running cmd like bash or nvcc:
 
     docker run -it --rm -w /home/jochen -v `pwd`:/home/jochen \
             --device /dev/nvidia0:/dev/nvidia0 \
             --device /dev/nvidiactl:/dev/nvidiactl \
             --device /dev/nvidia-uvm:/dev/nvidia-uvm \
             cuda cmd
+
+In order to expose all /dev/nvidia... files into the docker container,
+best to use a something like:
+
+    export DEVS=`find /dev -name 'nvidia*' -printf '--device %f:%f '`
+    docker run -it --rm -w /home/jochen -v `pwd`:/home/jochen $DEVS cuda cmd
 
