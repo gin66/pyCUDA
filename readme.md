@@ -30,7 +30,7 @@ Running cmd like bash or nvcc:
             cuda cmd
 
 In order to expose all /dev/nvidia... files into the docker container,
-best to use a something like:
+best to use something like:
 
     export DEVS=`find /dev -name 'nvidia*' -printf '--device %f:%f '`
     docker run -it --rm -w /home/ec2-user -v /home/ec2-user:/home/ec2-user $DEVS cuda cmd
