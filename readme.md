@@ -6,7 +6,8 @@ Preparation
 Copy libcuda driver library into your build directory
 excluding the symbolic links. For example:
 
-    cp -R /usr/lib/libcuda.so.*.* .
+    cp -R /usr/lib64/libcuda.so.*.* .
+    cp -R /usr/lib64/libnvidia.so.*.* .
 
 Then make your own build Dockerfile containing e.g.:
 
@@ -36,3 +37,8 @@ best to use something like:
     export USER=-w /home/ec2-user -v /home/ec2-user:/home/ec2-user
     docker run -it --rm $USER $DEVS cuda cmd
 
+
+Issues
+======
+
+    nvidia-smi is ok, but pyCUDA doesn't work. apparently misses /dev/nvidia-uvm

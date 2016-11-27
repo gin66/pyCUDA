@@ -12,8 +12,9 @@ RUN apt-get install -y libssl-dev
 RUN pip install pyblake2
 RUN pip install cryptography
 RUN pip install progressbar2
+RUN echo /usr/lib64 >/etc/ld.so.conf.d/lib64.conf
 
 ENV PYCUDA_CACHE_DIR=/tmp
 
-ONBUILD ADD lib*.so.* /usr/lib/
+ONBUILD ADD lib*.so.* /usr/lib64/
 ONBUILD RUN ldconfig
