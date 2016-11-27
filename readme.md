@@ -3,10 +3,10 @@ This Dockerfile is for use on aws.
 Preparation
 ===========
 
-Copy libcuda driver files into your build directory
-including the symbolic links. For example:
+Copy libcuda driver library into your build directory
+excluding the symbolic links. For example:
 
-    cp -R /usr/lib/libcuda.so* .
+    cp -R /usr/lib/libcuda.so.*.* .
 
 Then make your own build Dockerfile containing e.g.:
 
@@ -33,5 +33,6 @@ In order to expose all /dev/nvidia... files into the docker container,
 best to use something like:
 
     export DEVS=`find /dev -name 'nvidia*' -printf '--device %f:%f '`
-    docker run -it --rm -w /home/ec2-user -v /home/ec2-user:/home/ec2-user $DEVS cuda cmd
+    export USER=-w /home/ec2-user -v /home/ec2-user:/home/ec2-user
+    docker run -it --rm $USER $DEVS cuda cmd
 
