@@ -34,13 +34,8 @@ In order to expose all /dev/nvidia... files into the docker container,
 best to use something like:
 
 start.sh:
+
     export DEVS="`find /dev -name 'nvidia*' -printf '--device %f:%f '`"
     export TDEV="-v /dev/nvidia-uvm:/dev/nvidia-uvm"
     export USER="-w /home/ec2-user -v /home/ec2-user:/home/ec2-user"
     docker run -it --rm $USER $DEVS $TDEV cuda $*
-
-
-Issues
-======
-
-    nvidia-smi is ok, but pyCUDA doesn't work. apparently misses /dev/nvidia-uvm
