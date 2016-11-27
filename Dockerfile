@@ -15,5 +15,5 @@ RUN pip install progressbar2
 
 ENV PYCUDA_CACHE_DIR=/tmp
 
-ONBUILD ADD libcuda.so.* /usr/lib/
+ONBUILD ADD lib*.so.* /usr/lib/
 ONBUILD RUN ldconfig
